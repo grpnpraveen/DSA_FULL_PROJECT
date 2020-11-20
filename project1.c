@@ -210,11 +210,70 @@ void printuserfrnds(struct Graph* graph,int z)
         { 
             if(v==z-1){
 			
-			printf("-> %d", pCrawl->dest); }
+			printf("-> %d", pCrawl->dest);
+			printf("ok"); }
             pCrawl = pCrawl->next; 
         } 
         printf("\n"); 
     } 
+}
+//=====================================================================//
+int *commonhelp(struct Graph* graph,int z,int *ee)
+{	 
+	int v; 
+	int i=0;
+    for (v = 1; v <z+1 ; ++v) 
+    { 
+    	
+        struct AdjListNode* pCrawl = graph->array[v].head; 
+        while (pCrawl) 
+        { 
+            if(v==z-1)
+			{
+				ee[i]=pCrawl->dest;
+				i=i+1;
+		
+			}
+            pCrawl = pCrawl->next; 
+        } 
+       
+    } 
+}
+
+int nooffriends(struct Graph* graph,int z) 
+{ 
+    int v;
+	int m=0; 
+    for (v = 1; v <z+1 ; ++v) 
+    { 
+    	
+        struct AdjListNode* pCrawl = graph->array[v].head; 
+       
+        while (pCrawl) 
+        { 
+            if(v==z-1){
+			
+			m=m+1; }
+            pCrawl = pCrawl->next; 
+        } 
+         
+    } 
+    return m;
+}
+
+int printCommon(int arr1[], int len1, int arr2[],int len2) 
+{
+int i,j;
+for(i = 0; i < len1 ;i++) 
+	{
+for(j = 0; j < len2 ;j++) 
+			{
+				if(arr1[i] == arr2[j])
+				{
+				printf("\n Common elements is %d", arr1[i]);
+			}
+			}
+	} 
 }
 //===========================================================================
 void delete()
@@ -280,7 +339,7 @@ void main()
 	int V =1000;
 	struct Graph* graph = createGraph(V);
 	while(x==1){
-	printf("\n1.Present users\n2.Add user\n3.User info\n4.User friends\n5.Make friends for USER\n6.DELETE A USER\n7.Total_USERS\n8.All USERS and Their friends\n9.Common friends\n10.quit\nOpt your choice:-");
+	printf("\n1.Present users\n2.Add user\n3.User info\n4.User friends\n5.Make friends for USER\n6.DELETE A USER\n7.Total_USERS\n8.All USERS and Their friends\n9.Common friends between two\n10.quit\nOpt your choice:-");
 	scanf("%d",&opt);
 	switch(opt)
 	{
@@ -357,10 +416,26 @@ void main()
 			break;
 		};
 		
-		case 9:{
-		
-			break;
-		};
+		case 9:
+							{
+									int aa,ab,nf1,nf2;
+									int *q;
+									int *r;
+									printf("\nEnter the reference numbers of the two users :");
+									scanf("%d %d",&aa,&ab);
+									
+									nf1=nooffriends(graph,aa);
+									printf("%d\n",nf1);
+									nf2=nooffriends(graph,ab);
+									printf("%d",nf2);
+									int ax[nf1];
+									int ay[nf2];
+									q=commonhelp(graph,aa,ax);
+									r=commonhelp(graph,ab,ay);
+									printCommon(q,aa,r,ab);
+									
+									break;
+							};
 		
 		case 10:{
 			x=0;
