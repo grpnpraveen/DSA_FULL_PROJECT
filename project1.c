@@ -280,7 +280,7 @@ void main()
 	int V =1000;
 	struct Graph* graph = createGraph(V);
 	while(x==1){
-	printf("\n1.Present users\n2.Add user\n3.User info\n4.User friends\n5.Make friends for USER\n6.Common friends\n7.Total_USERS\n8.All USERS and Their friends\n9.quit\nOpt your choice:-");
+	printf("\n1.Present users\n2.Add user\n3.User info\n4.User friends\n5.Make friends for USER\n6.DELETE A USER\n7.Total_USERS\n8.All USERS and Their friends\n9.Common friends\n10.quit\nOpt your choice:-");
 	scanf("%d",&opt);
 	switch(opt)
 	{
@@ -358,9 +358,14 @@ void main()
 		};
 		
 		case 9:{
-			x=0;
+		
 			break;
 		};
+		
+		case 10:{
+			x=0;
+			break;
+		}
 		
 		default:{
 			printf("\n_________________________invalid________________________\n");
