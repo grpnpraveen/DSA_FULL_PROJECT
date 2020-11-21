@@ -126,6 +126,31 @@ int totalusers()
 	}
 	return total;
 }
+void friendsadd(int x)															
+{
+		int i;
+	struct node* temp=root;
+	if(temp==NULL)
+		{
+		printf("\n There are no users signed up yet\n");
+		}
+else
+		{
+			
+			for(i=0;i<x-1;i++){
+								
+									temp=temp->link;	
+							}	temp->data.friends++;
+								printf("Name : %s\n",temp->data.name);
+									printf("Age : %s\n",temp->data.age);
+									printf("Place : %s\n",temp->data.place);
+									printf("Number of Friends : %d\n",temp->data.friends);
+									printf("USER_NUMBER(ref): %d\n",temp->data.usernumber);
+									printf("\n\n\n\n");
+									
+		}
+}
+
 //===========================================================================
 
 struct AdjListNode 
@@ -217,7 +242,7 @@ void printuserfrnds(struct Graph* graph,int z)
         printf("\n"); 
     } 
 }
-//=====================================================================//
+//=====================================================================//   common friends 
 int *commonhelp(struct Graph* graph,int z,int *ee)
 {	 
 	int v; 
@@ -240,26 +265,6 @@ int *commonhelp(struct Graph* graph,int z,int *ee)
     } 
 }
 
-int nooffriends(struct Graph* graph,int z) 
-{ 
-    int v;
-	int m=0; 
-    for (v = 1; v <z+1 ; ++v) 
-    { 
-    	
-        struct AdjListNode* pCrawl = graph->array[v].head; 
-       
-        while (pCrawl) 
-        { 
-            if(v==z-1){
-			
-			m=m+1; }
-            pCrawl = pCrawl->next; 
-        } 
-         
-    } 
-    return m;
-}
 
 int printCommon(int arr1[], int len1, int arr2[],int len2) 
 {
@@ -274,6 +279,27 @@ for(j = 0; j < len2 ;j++)
 			}
 			}
 	} 
+}
+int getsize(int x)																//to get no.of friends		
+{
+		int i;
+	struct node* temp=root;
+	if(temp==NULL)
+		{
+		printf("\n There are no users signed up yet\n");
+		return 0;
+		}
+else
+		{
+		
+			for(i=0;i<x-1;i++){
+								
+									temp=temp->link;	
+							}	
+						
+																	
+		return temp->data.friends;							
+		}
 }
 //===========================================================================
 void delete()
@@ -384,6 +410,8 @@ void main()
 							printf("\nFrom which user to which user you are making a friendship bond(ref_nums):-");
 							scanf("%d %d",&fir,&sec);
 							addEdge(graph, fir, sec);
+							friendsadd(fir);
+							friendsadd(sec);
 					}
 				else{
 						printf("\nThere are no users yet\n");
@@ -418,21 +446,14 @@ void main()
 		
 		case 9:
 							{
-									int aa,ab,nf1,nf2;
-									int *q;
-									int *r;
+									int gg,ab,nf1,nf2;
 									printf("\nEnter the reference numbers of the two users :");
-									scanf("%d %d",&aa,&ab);
+									scanf("%d %d",&gg,&ab);
+									nf1=getsize(gg);
+									nf2=getsize(ab);
+									int one[nf1],two[nf2];
 									
-									nf1=nooffriends(graph,aa);
-									printf("%d\n",nf1);
-									nf2=nooffriends(graph,ab);
-									printf("%d",nf2);
-									int ax[nf1];
-									int ay[nf2];
-									q=commonhelp(graph,aa,ax);
-									r=commonhelp(graph,ab,ay);
-									printCommon(q,aa,r,ab);
+									
 									
 									break;
 							};
