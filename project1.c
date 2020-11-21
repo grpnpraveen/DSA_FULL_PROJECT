@@ -243,7 +243,7 @@ void printuserfrnds(struct Graph* graph,int z)
     } 
 }
 //=====================================================================//   common friends 
-int *commonhelp(struct Graph* graph,int z,int *ee)
+int *commonhelp(struct Graph* graph,int *a,int z)
 {	 
 	int v; 
 	int i=0;
@@ -255,19 +255,22 @@ int *commonhelp(struct Graph* graph,int z,int *ee)
         { 
             if(v==z-1)
 			{
-				ee[i]=pCrawl->dest;
+				a[i]=pCrawl->dest;
 				i=i+1;
 		
 			}
             pCrawl = pCrawl->next; 
         } 
        
-    } 
+    }
+	return a; 
 }
 
 
 int printCommon(int arr1[], int len1, int arr2[],int len2) 
 {
+	printf("\n********************************************************\n\n");
+	printf("COMMON FRIENDS ARE:  ");
 int i,j;
 for(i = 0; i < len1 ;i++) 
 	{
@@ -275,10 +278,11 @@ for(j = 0; j < len2 ;j++)
 			{
 				if(arr1[i] == arr2[j])
 				{
-				printf("\n Common elements is %d", arr1[i]);
+				printf("%d  ", arr1[i]);
 			}
 			}
-	} 
+	}
+	printf("\n********************************************************\n\n\n"); 
 }
 int getsize(int x)																//to get no.of friends		
 {
@@ -445,16 +449,26 @@ void main()
 		};
 		
 		case 9:
-							{
+							{		int cd;
 									int gg,ab,nf1,nf2;
 									printf("\nEnter the reference numbers of the two users :");
 									scanf("%d %d",&gg,&ab);
 									nf1=getsize(gg);
 									nf2=getsize(ab);
+									int *u;
+									int *h;
 									int one[nf1],two[nf2];
-									
-									
-									
+									u=commonhelp(graph,one,gg+1);
+									h=commonhelp(graph,two,ab+1);
+									for(cd=0;cd<nf1;cd++)
+									{
+										one[cd]=u[cd];
+									}
+									for(cd=0;cd<nf2;cd++)
+									{
+										two[cd]=h[cd];
+									}
+									printCommon(one,nf1,two,nf2);
 									break;
 							};
 		
@@ -476,7 +490,7 @@ void main()
 	}
 	}
 	
-	
+	printf("\n\n______________________________BY GALI RAVI PRAVEEN\n");
 
 
 }
