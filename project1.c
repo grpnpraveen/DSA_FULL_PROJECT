@@ -236,7 +236,7 @@ void printuserfrnds(struct Graph* graph,int z)
             if(v==z-1){
 			
 			printf("-> %d", pCrawl->dest);
-			printf("ok"); }
+			 }
             pCrawl = pCrawl->next; 
         } 
         printf("\n"); 
